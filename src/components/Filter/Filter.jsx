@@ -9,11 +9,10 @@ export const Filter = ({ onFilter }) => {
         type="text"
         name="name"
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-        onChange={onFilter}
+        onChange={e => onFilter(e.target.value)}
       />
     </label>
   );
 };
-export default Filter;
 
 Filter.propTypes = { onFilter: PropTypes.func };
