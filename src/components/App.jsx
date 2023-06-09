@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Form from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 
 export const App = () => {
   const [contacts, setContacts] = useState([]);
@@ -21,18 +21,14 @@ export const App = () => {
     }
   }, [contacts]);
 
-  const submitCathcer = ({ name, number }) => {
-    const person = {
-      name: `${name}`,
-      id: `${nanoid()}`,
-      number: `${number}`,
-    };
-    const isExist = contacts.find(contact => contact.name === name);
-    if (isExist) {
-      alert(`${name} is already in contacts`);
-    } else {
-      setContacts(prevContacts => [person, ...prevContacts]);
-    }
+  const submitCathcer = newContact => {
+    setContacts(prevContacts => {
+      if (prevContacts.find(contact => contact.name === newContact.name)) {
+        alert(`${newContact.name} is already in contacts`);
+        return prevContacts;
+      }
+      return [newContact, ...prevContacts];
+    });
   };
 
   const onDelete = id => {
